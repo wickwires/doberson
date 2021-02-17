@@ -20,30 +20,35 @@ const styles = StyleSheet.create({
   messageHeaderContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
     paddingBottom: 5,
   },
   // userImage: {
-  //   width: 80,
-  //   height: 80,
-  //   alignItems: 'flex-start',
+  //   width: 50,
+  //   height: 50,
+  //   alignSelf: 'flex-start',
   // },
   messageNameText: {
     fontSize: 16,
     marginHorizontal: 20,
-    alignItems: 'flex-start',
+    alignSelf: 'flex-start',
+    lineHeight: 20,
   },
   time: {
     fontSize: 16,
     color: '#8e8e93',
-    alignItems: 'flex-end',
+    alignContent: 'flex-end',
     marginHorizontal: 20,
+    lineHeight: 20,
   },
   messagePreviewText: {
     fontSize: 16,
     color: '#8e8e93',
     marginHorizontal: 20,
     paddingBottom: 10,
+    lineHeight: 20,
+    alignItems: 'flex-start',
   },
 });
 
