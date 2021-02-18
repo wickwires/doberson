@@ -29,8 +29,8 @@ const Home = () => {
       <Text style={styles.messagePreviewText}>Message Preview</Text>
       <Divider />
       <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
+        title="Selected Message"
+        onPress={() => navigation.navigate('Selected Message')}
       />
     </View>
   );
