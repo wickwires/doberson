@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "609074660889",
+    "project_id": "doberson-e2078",
+    "storage_bucket": "doberson-e2078.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609074660889:android:5d691bc522d37801ad8c88",
+        "android_client_info": {
+          "package_name": "com.doberson"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609074660889-c6kgj37r0eu4dhaled9cch8our5cjhua.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.doberson",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "609074660889-k1hi2qi0q0s88ckombofvmt7f1jengv4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBh0gBIugAQEr031HfHC2kpzygYgwZTFCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609074660889-k1hi2qi0q0s88ckombofvmt7f1jengv4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "609074660889-c6d2gjof2vbl4qidpjdlal9dhhajq9b4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.doberson"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
