@@ -1,5 +1,6 @@
+import auth from '@react-native-firebase/auth';
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, View, TouchableOpacity, Text} from 'react-native';
 
 import InputText from '../../Components/InputText';
@@ -7,8 +8,27 @@ import InputText from '../../Components/InputText';
 import styles from './style';
 
 const Login = ({navigation}) => {
-  const navToHome = () => {
-    navigation.navigate('Home');
+  // State
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // Functions
+  const login = () => {
+    auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        console.log('User account created & signed in!');
+        navigation.navigate('Home');
+      })
+      .catch((error) => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+        console.error(error);
+      });
   };
 
   return (
@@ -18,13 +38,13 @@ const Login = ({navigation}) => {
         <Text style={styles.header}>doberson</Text>
       </View>
       <View style={styles.bodyContainer}>
-        <InputText />
+        <InputText setEmail={setEmail} setPassword={setPassword} />
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity>
           <Text style={styles.forgotButton}>Forgot Password?</Text>
         </TouchableOpacity>
-        <Button style={styles.loginButton} title="Login" onPress={navToHome} />
+        <Button style={styles.loginButton} title="Login" onPress={login} />
         {/* <TouchableOpacity style={styles.loginButton}>
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity> */}

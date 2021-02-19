@@ -3,9 +3,9 @@ import {View, TextInput, Keyboard, ScrollView} from 'react-native';
 
 import styles from './style';
 
-const InputText = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const InputText = ({setEmail, setPassword}) => {
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
 
   return (
     <View style={styles.container}>
