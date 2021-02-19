@@ -1,6 +1,6 @@
 import auth from '@react-native-firebase/auth';
 import 'react-native-gesture-handler';
-import React, {useState} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {Button, View, TouchableOpacity, Text} from 'react-native';
 
 import InputText from '../../Components/InputText';
@@ -12,7 +12,21 @@ const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  console.log(user);
   // Functions
+  const onAuthStateChanged = useCallback(
+    (userObject) => {
+      setUser(userObject);
+      if (initializing) {
+        setInitializing(false);
+      }
+    },
+    [initializing],
+  );
+
   const login = () => {
     auth()
       .createUserWithEmailAndPassword(email, password)
@@ -30,6 +44,16 @@ const Login = ({navigation}) => {
         console.error(error);
       });
   };
+
+  // Effects
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, [onAuthStateChanged]);
+
+  if (initializing) {
+    return null;
+  }
 
   return (
     <View style={styles.container}>
