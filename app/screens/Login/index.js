@@ -7,7 +7,12 @@ import useAsyncEffect from 'use-async-effect';
 
 import InputText from '../../Components/InputText';
 
-import {getFirestoreObject} from '../../utils/firestore';
+import {
+  getFirestoreObject,
+  setFirestoreObject,
+  createOrUpdateUser,
+} from '../../utils/firestore';
+import {signout} from '../../utils/firebase';
 
 import styles from './style';
 
@@ -19,10 +24,14 @@ const Login = ({navigation}) => {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
-  console.log(user);
   // Functions
   const onAuthStateChanged = useCallback(
-    (userObject) => {
+    async (userObject) => {
+      // console.log('user: ', userObject);
+      if (userObject) {
+        console.log('setting firestore user');
+        await createOrUpdateUser(userObject, userObject.uid);
+      }
       setUser(userObject);
       if (initializing) {
         setInitializing(false);
@@ -31,22 +40,50 @@ const Login = ({navigation}) => {
     [initializing],
   );
 
-  const login = () => {
-    auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        console.log('User account created & signed in!');
-        navigation.navigate('Home');
-      })
-      .catch((error) => {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
-        console.error(error);
-      });
+  const login = async () => {
+    try {
+      const userResp = await auth().signInWithEmailAndPassword(email, password);
+      console.log('user resp: ', userResp);
+      console.log('User account signed in!');
+      // Stores user in firestore database
+      await createOrUpdateUser(userResp, userResp.user.uid);
+      navigation.navigate('Home');
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        console.log('That email address is already in use!');
+      }
+      if (error.code === 'auth/invalid-email') {
+        console.log('That email address is invalid!');
+      }
+      console.error(error);
+    }
+  };
+
+  const signup = async () => {
+    try {
+      const userResp = await auth().createUserWithEmailAndPassword(
+        email,
+        password,
+      );
+      console.log('user resp: ', userResp);
+      console.log('User account created & signed in!');
+      // Stores user in firestore database
+      await createOrUpdateUser(userResp, userResp.user.uid);
+      navigation.navigate('Home');
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        console.log('That email address is already in use!');
+      }
+      if (error.code === 'auth/invalid-email') {
+        console.log('That email address is invalid!');
+      }
+      console.error(error);
+    }
+  };
+
+  const logout = async () => {
+    await signout();
+    console.log('User account signed out!');
   };
 
   // Effects
@@ -55,10 +92,10 @@ const Login = ({navigation}) => {
     return subscriber; // unsubscribe on unmount
   }, [onAuthStateChanged]);
 
-  useAsyncEffect(async () => {
-    const result = await getFirestoreObject();
-    console.log('hi :', result);
-  }, []);
+  // useAsyncEffect(async () => {
+  //   const result = await getFirestoreObject();
+  //   console.log('hi :', result);
+  // }, []);
 
   // useEffect(() => {});
 
@@ -79,7 +116,10 @@ const Login = ({navigation}) => {
         <TouchableOpacity>
           <Text style={styles.forgotButton}>Forgot Password?</Text>
         </TouchableOpacity>
+        <Button style={styles.loginButton} title="Signup" onPress={signup} />
         <Button style={styles.loginButton} title="Login" onPress={login} />
+
+        <Button style={styles.loginButton} title="Logout" onPress={logout} />
         {/* <TouchableOpacity style={styles.loginButton}>
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity> */}
