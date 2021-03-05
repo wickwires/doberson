@@ -1093,6 +1093,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-10.8.0.tgz#a13da7a77b9d3f356a94c081e3aedbfa8230e037"
   integrity sha512-aKKImq/z1kaWNvssWqb0aBgtctH34Pnke6wFTM6GE3R3uGZ57d+lPVl+57az8D3nj5xVwJyNftl6/1WmPzCPBw==
 
+"@react-native-firebase/firestore@^11.0.0":
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-11.0.0.tgz#5e609076a03f3ec231f46c464f5761259ee425e3"
+  integrity sha512-wj7ZPYhZdScWYEn5ctCkvrxPYmsgLcvHNykuYmAGBNr6ZSCXhDC1Ccv2DQ9WNaY3fdSYl52Fqck3sgl5orGVXg==
+
 "@react-navigation/core@^5.15.1":
   version "5.15.1"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.15.1.tgz#dab5192277c606d9acbea511dac407c2834b5fbe"
@@ -6760,6 +6765,11 @@ urix@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
   integrity sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
+
+use-async-effect@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/use-async-effect/-/use-async-effect-2.2.3.tgz#752cc065b7d002c177e754cd0624a166018341bc"
+  integrity sha512-l/FSqFyqPwhpDJseKyJ9/FZi3PBat2LOcspAqFJznm6H8pgWs67WIjMDr1s3WFBd6cS9zvQrySX0HyHfZi/Upg==
 
 use-subscription@^1.0.0:
   version "1.5.1"

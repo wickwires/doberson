@@ -1,9 +1,13 @@
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 import 'react-native-gesture-handler';
 import React, {useState, useEffect, useCallback} from 'react';
 import {Button, View, TouchableOpacity, Text} from 'react-native';
+import useAsyncEffect from 'use-async-effect';
 
 import InputText from '../../Components/InputText';
+
+import {getFirestoreObject} from '../../utils/firestore';
 
 import styles from './style';
 
@@ -50,6 +54,13 @@ const Login = ({navigation}) => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, [onAuthStateChanged]);
+
+  useAsyncEffect(async () => {
+    const result = await getFirestoreObject();
+    console.log('hi :', result);
+  }, []);
+
+  // useEffect(() => {});
 
   if (initializing) {
     return null;
